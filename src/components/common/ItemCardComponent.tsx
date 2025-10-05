@@ -16,26 +16,27 @@ const ItemCardComponent = ({ imageSrc, title, subtitle, count }: ItemCardProps) 
     return (
 
 
-        <Card className="p-0 overflow-hidden gap-0 rounded-md">
-            <CardContent className="p-0">
+        <Card className="p-0 overflow-hidden gap-0 rounded-lg h-full relative group">
+            <CardContent className="p-0 relative">
                 <Image
                     src={imageSrc}
                     alt={title}
                     width={400}
-                    height={260}
-                    className="w-full h-40 object-cover"
+                    height={300}
+                    className="w-full h-56 object-cover"
                 />
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
             </CardContent>
-
-            <CardFooter className="bg-blue-800/80 py-3 px-4">
-                <div className=" text-white">
-                    <h3 className="text-xl font-semibold leading-tight drop-shadow-sm">{title}</h3>
-                    {subtitle && (
-                        <p className="text-xs text-[#dbcdcd] opacity-90 mt-1 drop-shadow-sm">{subtitle}
-                            <span className="text-white"> {count} nəfər</span>
-                        </p>
-                    )}
-                </div>
+            <CardFooter className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent backdrop-blur-sm">        <div className="text-white w-full">
+                <h3 className="text-xl font-semibold leading-tight">{title}</h3>
+                {subtitle && (
+                    <p className="text-xs text-gray-200 mt-1">
+                        {subtitle}
+                        <span className="text-white font-medium"> {count} nəfər</span>
+                    </p>
+                )}
+            </div>
             </CardFooter>
         </Card>
     )

@@ -34,8 +34,8 @@ const Hero = ({
                 </div>
             </div>
 
-            <div className="w-full flex justify-center items-center gap-3 bg-[#F3F3F3] rounded-md container mx-auto py-6 mt-12">
-                <Image src="/images/nazirlik.png" alt="Nazirlik" className="object-cover" width={100} height={100} />
+            <div className="w-full flex justify-center items-center gap-3 bg-[#FFF5FE] rounded-md container mx-auto py-6 mt-12 border border-[#484174]">
+                <Image src="/images/nazirlik.png" alt="Nazirlik" className="object-cover" width={120} height={120} />
                 <div>
                     <div className="text-[#979797] text-xs md:text-base text-center mt-2">
                         Layihə <span className="font-semibold text-black">Mədəniyyət Nazirliyi</span> tərəfindən dəstəklənir
