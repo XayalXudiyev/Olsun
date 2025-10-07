@@ -53,6 +53,7 @@ const ItemsCategories = ({ category = "Otellər" }: ItemsCategoriesProps) => {
                                 {allItems.map((item) => (
                                     <ItemCardComponent
                                         key={item.id}
+                                        id={item.id}
                                         imageSrc={item.imageSrc}
                                         title={item.title}
                                         subtitle={item.subtitle}
@@ -82,6 +83,7 @@ const ItemsCategories = ({ category = "Otellər" }: ItemsCategoriesProps) => {
                     {items.map((item) => (
                         <CarouselItem key={item.id} className="basis-1/2 sm:basis-1/3 md:basis-1/4">
                             <ItemCardComponent
+                                id={item.id}
                                 imageSrc={item.imageSrc}
                                 title={item.title}
                                 subtitle={item.subtitle}

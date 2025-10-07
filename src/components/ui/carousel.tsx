@@ -175,8 +175,9 @@ function CarouselPrevious({
   className,
   variant = "outline",
   size = "icon",
+  icon,
   ...props
-}: React.ComponentProps<typeof Button>) {
+}: React.ComponentProps<typeof Button> & { icon?: React.ReactNode }) {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel()
 
   return (
@@ -185,7 +186,7 @@ function CarouselPrevious({
       variant={variant}
       size={size}
       className={cn(
-        "absolute size-8 rounded-full",
+        "absolute size-8 rounded-full hover:cursor-pointer",
         orientation === "horizontal"
           ? "top-1/2 -left-10 -translate-y-1/2"
           : "-top-10 left-1/2 -translate-x-1/2 rotate-90",
@@ -195,18 +196,20 @@ function CarouselPrevious({
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeft />
+      {icon ?? <ArrowLeft />}
       <span className="sr-only">Previous slide</span>
     </Button>
   )
 }
 
+// ...existing code...
 function CarouselNext({
   className,
   variant = "outline",
   size = "icon",
+  icon,
   ...props
-}: React.ComponentProps<typeof Button>) {
+}: React.ComponentProps<typeof Button> & { icon?: React.ReactNode }) {
   const { orientation, scrollNext, canScrollNext } = useCarousel()
 
   return (
@@ -215,7 +218,7 @@ function CarouselNext({
       variant={variant}
       size={size}
       className={cn(
-        "absolute size-8 rounded-full",
+        "absolute size-8 rounded-full hover:cursor-pointer",
         orientation === "horizontal"
           ? "top-1/2 -right-10 -translate-y-1/2"
           : "-bottom-10 left-1/2 -translate-x-1/2 rotate-90",
@@ -225,7 +228,7 @@ function CarouselNext({
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRight />
+      {icon ?? <ArrowRight />}
       <span className="sr-only">Next slide</span>
     </Button>
   )
