@@ -1,8 +1,9 @@
-import { Button } from "@/components/ui/button"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import ContactModal from "@/components/common/ContactModal"
 import Image from "next/image"
 import { notFound } from "next/navigation"
+import MapComponent from "@/components/common/MapComponent"
 
 type Props = {
     params: { id: string }
@@ -71,14 +72,18 @@ export default function DetailsPage({ params }: Props) {
 
                         </div>
 
+
+
                         <div className="mb-2">
-                            <Button type="button" className="inline-flex items-center gap-3 bg-primary text-white px-6 py-3 rounded-lg">
-                                <Image src="/images/icons/Vector.svg" alt="icon" width={18} height={18} />
-                                Müraciət göndər
-                            </Button>
+                            <ContactModal />
                         </div>
                     </div>
+
                 </div>
+                    <MapComponent
+                        zoom={12}
+                        containerStyle={{ width: "100%", height: "100%" }}
+                    />
             </div>
         </main>
     )
