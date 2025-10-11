@@ -22,19 +22,7 @@ coverage/
 *.tsbuildinfo
 next-env.d.ts
 
-
-# Java
-**/target/
-**/bin/
-**/*.class
-**/*.log
-**/*.jar
-**/*.war
-**/*.ear
-.gradle/
-.mvn/
-# Exception: Add gradle-wrapper.jar to Git
-!**/gradle/wrapper/gradle-wrapper.jar
+secrets.json
 
 # IDE & System files
 .idea/

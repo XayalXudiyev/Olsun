@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm, type Path, type FieldError } from "react-hook-form"
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from "@/components/ui/dialog"
@@ -9,16 +8,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Image from "next/image"
-
-const contactSchema = z.object({
-    name: z.string().min(2, "Adınızı daxil edin"),
-    company: z.string().optional(),
-    email: z.string().email("Email düzgün deyil"),
-    phone: z.string().min(5, "Mobil nömrə düzgün deyil"),
-    message: z.string().max(500).optional(),
-})
-
-type ContactData = z.infer<typeof contactSchema>
+import { toast } from "sonner"
+import { ContactSchema, type ContactData } from "@/constants/scheme"
 
 export default function ContactModal() {
     const [open, setOpen] = useState(false)
@@ -29,20 +20,57 @@ export default function ContactModal() {
         formState: { errors, isSubmitting },
         watch,
         reset,
-    } = useForm<ContactData>({ resolver: zodResolver(contactSchema) })
+    } = useForm<ContactData>({
+        defaultValues: {
+            name: "",
+            company: "",
+            email: "",
+            phone: "",
+            message: "",
+        },
+        resolver: zodResolver(ContactSchema),
+        mode: "onChange",
+    })
 
     const messageValue = watch("message") ?? ""
 
-    async function onSubmit(data: ContactData) {
+    const onSubmit = async (data: ContactData) => {
         try {
-            // TODO: send to API
-            console.log("Contact submit:", data)
-            setOpen(false)
-            reset()
-        } catch (err) {
-            console.error(err)
+            toast.loading("Müraciətiniz göndərilir...", {
+                id: "contact-form"
+            })
+            
+            const response = await fetch("/api/sheets", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            })
+
+            if (response.ok) {
+                toast.success("Müraciətiniz uğurla göndərildi!", {
+                    id: "contact-form",
+                    description: "Tezliklə sizinlə əlaqə saxlayacağıq."
+                })
+                setOpen(false)
+                reset()
+            } else {
+                toast.error("Xəta baş verdi", {
+                    id: "contact-form",
+                    description: "Zəhmət olmasa yenidən cəhd edin."
+                })
+            }
+        } catch (error) {
+            toast.error("Bağlantı xətası", {
+                id: "contact-form",
+                description: "İnternet bağlantınızı yoxlayın və yenidən cəhd edin."
+            })
         }
     }
+
+
+
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>

@@ -3,7 +3,7 @@
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api"
 import React from "react"
 
-const APİ_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string
+const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string
 
 function MapComponent({
 	center,
@@ -15,7 +15,7 @@ function MapComponent({
 	containerStyle: { width: string; height: string }
 }) {
 	const { isLoaded } = useJsApiLoader({
-		googleMapsApiKey: APİ_KEY,
+		googleMapsApiKey: API_KEY,
 	})
 
 	if (!isLoaded) return <div>Loading...</div>
