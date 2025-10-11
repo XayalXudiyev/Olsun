@@ -77,7 +77,7 @@ export default function ContactModal() {
             <DialogTrigger asChild>
                 <Button type="button" className="inline-flex items-center gap-3 bg-primary text-white px-6 py-3 rounded-lg">
                     <Image src="/images/icons/Vector.svg" alt="icon" width={18} height={18} />
-                    Müraciət göndər
+                    Müraciət göndərinn
                 </Button>
             </DialogTrigger>
 
