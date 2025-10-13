@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import ContactModal from "@/components/common/ContactModal"
 import Image from "next/image"
 import { notFound } from "next/navigation"
-import MapComponent from "@/components/common/MapComponent"
+import { MapContainer } from "@/components/common/MapContainer"
 
 type Props = {
     params: { id: string }
@@ -80,10 +80,10 @@ export default function DetailsPage({ params }: Props) {
                     </div>
 
                 </div>
-                    <MapComponent
-                        zoom={12}
-                        containerStyle={{ width: "100%", height: "100%" }}
-                    />
+                <MapContainer
+                    zoom={12}
+                    containerStyle={{ width: "100%", height: "100%" }}
+                />
             </div>
         </main>
     )

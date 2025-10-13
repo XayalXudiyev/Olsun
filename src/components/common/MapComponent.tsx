@@ -1,24 +1,28 @@
 "use client"
 
-import GoogleMap from "./GoogleMap";
+import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api"
 
-const MapComponent = ({
+const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string
+
+export const MapComponent = ({
+	center,
 	zoom,
 	containerStyle,
 }: {
+	center: { lat: number; lng: number }
 	zoom: number
 	containerStyle: { width: string; height: string }
 }) => {
+	const { isLoaded } = useJsApiLoader({
+		googleMapsApiKey: API_KEY,
+	})
+
+	if (!isLoaded) return <div>Loading...</div>
+
 	return (
-		<div className="flex  flex-col shadow-lg h-full lg:h-[calc(100vh-300px)] mt-10">
-			<div>Məkana xəritə üzərindən baxın</div>
-			<GoogleMap
-				center={{ lat: 40.37535, lng: 49.8485 }}
-				zoom={zoom}
-				containerStyle={containerStyle}
-			/>
-		</div>
+		<GoogleMap center={center} zoom={zoom} mapContainerStyle={containerStyle}>
+			<Marker position={center} />
+		</GoogleMap>
 	)
 }
 
-export default MapComponent
